@@ -1,4 +1,5 @@
 import { generateHydraS1Attester } from "@attestations-collections/base/hydra-s1";
+import { hydraS1GroupPropertiesEncoders } from "@attestations-collections/base/hydra-s1/hydra-s1-properties-encoder";
 import { factoryBadges } from "@attestations-collections/playground/polygon/factory/hydra-s1-simple-factory-badges";
 import { factoryAttestationsCollections } from "@attestations-collections/playground/polygon/factory/hydra-s1-simple-factory-collections";
 import { Network } from "topics/attester";
@@ -33,6 +34,7 @@ export const hydraS1SimpleAttester = generateHydraS1Attester(
   {
     name: "hydra-s1-simple",
     network: Network.Polygon,
+    groupPropertiesEncoder: hydraS1GroupPropertiesEncoders.simpleEncoder,
     attestationsCollections: [
       ...factoryAttestationsCollections,
       // Masquerade
@@ -139,14 +141,14 @@ export const hydraS1SimpleAttester = generateHydraS1Attester(
       {
         internalCollectionId: 30,
         groupFetcher: async (groupStore) => [
-          await groupStore.latest("nft-collector"), 
+          await groupStore.latest("nft-collector"),
         ],
       },
       // ENS Supporters
       {
         internalCollectionId: 33,
         groupFetcher: async (groupStore) => [
-          await groupStore.latest("ens-supporters"), 
+          await groupStore.latest("ens-supporters"),
         ],
       },
       // sismo Contributors
@@ -770,54 +772,60 @@ export const hydraS1SimpleBadges: BadgesCollection = {
         {
           logoUrl: "",
           label: "POAP",
-          url: "https://poap.gallery/"
-        }
-      ]
-    }, 
+          url: "https://poap.gallery/",
+        },
+      ],
+    },
     {
-      internalCollectionId: 30, 
-      name: "NFT Collector ZK Badge", 
-      description: "ZK Badge received by holders of major NFTs", 
-      image: "nft-collector.svg", 
-      groupGeneratorName: "nft-collector", 
-      publicContacts: [{ 
-        type: "twitter", 
-        contact: "Web3PON" 
-      }],
+      internalCollectionId: 30,
+      name: "NFT Collector ZK Badge",
+      description: "ZK Badge received by holders of major NFTs",
+      image: "nft-collector.svg",
+      groupGeneratorName: "nft-collector",
+      publicContacts: [
+        {
+          type: "twitter",
+          contact: "Web3PON",
+        },
+      ],
       eligibility: {
-        shortDescription: "Have NFT from the post popular collections",  // Add collections
-        specification: "You should have token in your wallet that belongs to one of the colelctions",
+        shortDescription: "Have NFT from the post popular collections", // Add collections
+        specification:
+          "You should have token in your wallet that belongs to one of the colelctions",
       },
-      links: [
-      ]
-    }, 
+      links: [],
+    },
     {
       internalCollectionId: 33,
       name: "[playground] ENS Supporter ZK Badge",
-      description: "[playground] ZK Badge owned by ENS name owners that are reputable on Twitter (curated by hive.one) and added their .eth in their username.",
-      image: "ens_supporters.svg", 
+      description:
+        "[playground] ZK Badge owned by ENS name owners that are reputable on Twitter (curated by hive.one) and added their .eth in their username.",
+      image: "ens_supporters.svg",
       groupGeneratorName: "ens-supporters",
-      publicContacts: [{
-        type: "twitter",
-        contact: "@sismo_eth"
-      },
-    ],
+      publicContacts: [
+        {
+          type: "twitter",
+          contact: "@sismo_eth",
+        },
+      ],
       eligibility: {
-        shortDescription: "Be part of the most reputable ENS domain accounts on Twitter",
-        specification: "Be part of the first 10k Ethereum Twitter Influencer listed on Hive.one that added their .eth name in their username",
+        shortDescription:
+          "Be part of the most reputable ENS domain accounts on Twitter",
+        specification:
+          "Be part of the first 10k Ethereum Twitter Influencer listed on Hive.one that added their .eth name in their username",
       },
       links: [
         {
           logoUrl: "",
           label: "ENS",
-          url: "https://ens.domains/"
+          url: "https://ens.domains/",
         },
         {
           logoUrl: "",
           label: "Hive",
-          url: "https://hive.one/"
+          url: "https://hive.one/",
         },
-      ]
+      ],
     },
     {
       internalCollectionId: 5151110,
@@ -826,15 +834,18 @@ export const hydraS1SimpleBadges: BadgesCollection = {
         "[playground] ZK Badge owned by Sismo contributors. This Badge is used in Sismo Governance for contributors to voice their opinions.",
       image: "sismo_contributors.svg",
       groupGeneratorName: "sismo-contributors",
-      publicContacts: [{
-        type: "twitter",
-        contact: "@sismo_eth"
-      }],
+      publicContacts: [
+        {
+          type: "twitter",
+          contact: "@sismo_eth",
+        },
+      ],
       eligibility: {
-        shortDescription: "Prove that you are involved in Sismo by holding .sismo.eth ENS, a contribution POAP, or early ZK Badges.",
+        shortDescription:
+          "Prove that you are involved in Sismo by holding .sismo.eth ENS, a contribution POAP, or early ZK Badges.",
         specification: "",
       },
-      links: []
+      links: [],
     },
   ],
 };
